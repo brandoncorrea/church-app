@@ -1,23 +1,36 @@
 import config from '../config/config';
 import ContactCard from '../components/contactCard';
+import { Row, Col } from 'react-bootstrap'
+import Container from 'react-bootstrap/Container'
+
+const commonMargin = { margin: '1em 0' };
 
 const GetContactCards = (coll) =>
-    coll.map(i => <ContactCard contact={i} />);
+  coll.map(i => 
+    <Col style={commonMargin}>
+      <ContactCard contact={i} />
+    </Col>);
 
 const Header = (text) =>
-    <h4 style={{ marginBottom: '25px' }}>{text}</h4>;
+  <h3 style={commonMargin}>{text}</h3>;
+
+const GetFluidContainer = (title, coll) =>
+  <>
+    { Header(title) }
+    <Container fluid>
+      <Row>
+        { GetContactCards(coll) }
+      </Row>
+    </Container>
+  </>
 
 function Contact() {
   return (
-    <div>
-        <h2>Contact Us</h2>
-
-        { Header("Pastors") }
-        { GetContactCards(config.pastors) }
-
-        { Header("Staff") }
-        { GetContactCards(config.staff) }
-    </div>
+    <>
+      <h1>Contact Us</h1>
+      { GetFluidContainer("Pastors", config.pastors) }
+      { GetFluidContainer("Staff", config.staff) }
+    </>
   );
 }
 

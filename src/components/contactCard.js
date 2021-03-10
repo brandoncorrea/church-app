@@ -11,7 +11,7 @@ const IsNullOrWhiteSpace = (text) =>
 function ContactCard(props) {
     var contact = props.contact;
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card style={{ width: '18rem', margin: '0 auto' }}>
             <Card.Img variant="top" src={contact.photo} />
             <Card.Body>
                 <Card.Title>{contact.name}</Card.Title>
