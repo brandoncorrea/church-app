@@ -1,10 +1,11 @@
 import Home from './pages/home';
 import Contact from './pages/contact';
+import Location from './pages/location';
 import Navigation from './components/navigation';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-function App() {
+function App(props) {
   return (
     <>
       <Navigation />
@@ -13,6 +14,9 @@ function App() {
           <Switch>
             <Route path="/contact">
               <Contact />
+            </Route>
+            <Route path="/location/:id">
+              <Location />
             </Route>
             <Route path="/">
               <Home />

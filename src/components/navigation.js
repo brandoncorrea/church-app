@@ -1,8 +1,38 @@
 import './navigation.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import config from '../config/config';
 
+const Nothing = <></>;
+const IsNullOrEmpty = (coll) =>
+  coll == null || 
+  coll === undefined ||
+  coll.length === 0;
+
+const GetLink = (id) => "/location/" + id;
+
+const GetNavLink = (campus) =>
+  <Nav.Link 
+    href={GetLink(campus.id)}
+    >{campus.name}</Nav.Link>
+
+const GetDropdownLocations = (campuses) =>
+  <NavDropdown title="Locations" id="basic-nav-dropdown">
+    {
+      campuses.map(i => 
+        <NavDropdown.Item 
+          href={GetLink(i.id)}
+          >{i.name}</NavDropdown.Item>)
+    }
+  </NavDropdown>
+
+const GetCampusLinks = () =>
+  IsNullOrEmpty(config.campuses)
+    ? Nothing
+  : config.campuses.length === 1
+    ? GetNavLink(config.campuses[0])
+  : GetDropdownLocations(config.campuses);
+  
 function Navigation() {
   return (
     <Navbar bg="light" expand="lg">
@@ -12,13 +42,7 @@ function Navigation() {
             <Nav className="mr-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
-              {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown> */}
+              { GetCampusLinks() }
             </Nav>
         </Navbar.Collapse>
     </Navbar>
