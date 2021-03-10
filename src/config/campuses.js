@@ -1,4 +1,5 @@
 const mainCampus = {
+    id: 0,
     name: "Main Campus",
     phone: "555-555-5555",
     officeHours: "Mon-Fri 8:00am - 5:00pm",
